@@ -33,19 +33,15 @@ function getRandomArrayElement(elements) {
 }
 
 function getRandomMultipleArrayElement(elements) {
-  const generateNumber = generateRandomNumber(1, elements.length);
-  let result = '';
-  for(let i = 0; i < generateNumber; i++) {
-    let multipleElement = elements[generateRandomNumber(0, elements.length - 1)];
-    if (result.includes(multipleElement)) {
-      multipleElement = elements[generateRandomNumber(0, elements.length - 1)];
-    }
-    result += `${multipleElement}${i === generateNumber - 1 ? '': ' '}`;
+  const randomArrayNumber = generateRandomNumber(1, elements.length -1);
+  for(let i = elements.length - 1; i > 0; i--) {
+    const randomSort = Math.floor(Math.random() * (i + 1));
+    [elements[i], elements[randomSort]] = [elements[randomSort], elements[i]];
   }
-  return result;
+  const array = elements.slice(0, randomArrayNumber);
+  const arrayResult = array.join(', ');
+  return(arrayResult);
 }
-
-getRandomMultipleArrayElement(TYPES);
 
 let imgAdressPostfix = 0;
 
