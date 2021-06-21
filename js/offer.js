@@ -79,11 +79,11 @@ function generateSimilarAds(data) {
       featuresList.textContent = '';
       const featuresListFragment = document.createDocumentFragment();
       offer.features.forEach((feature) => {
-        const featureTemplate = document.createElement('img');
+        const featureTemplate = document.createElement('li');
         featureTemplate.classList.add('popup__feature',`popup__feature--${feature}`);
         featuresListFragment.appendChild(featureTemplate);
       });
-      featuresList.appendChild.featuresListFragment;
+      featuresList.appendChild(featuresListFragment);
     }
     generateOffer(element[1]);
     const authorPhoto = offerElement.querySelector('.popup__avatar');
