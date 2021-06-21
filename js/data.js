@@ -28,6 +28,8 @@ const locationLng = {
   max: 139.8,
 };
 
+const OFFER_MAGIC_COUNT = 10;
+
 function generateRandomNumber(minNumber, maxNumber, afterDotNumber = 0) {
   const lower = Math.min(Math.abs(minNumber), Math.abs(maxNumber));
   const upper = Math.max(Math.abs(minNumber), Math.abs(maxNumber));
@@ -60,8 +62,6 @@ const createAuthor = () => {
   };
 };
 
-createAuthor();
-
 function getLocation() {
   return {
     lat: generateRandomNumber(locationLat.min, locationLat.max, 5),
@@ -85,20 +85,9 @@ function createOffer() {
   };
 }
 
-function generateDataArray(arrayGenerate, arrayCount) {
-  return new Array(arrayCount).fill(null).map(() => arrayGenerate());
-}
-
-const authorDataArray = generateDataArray(createAuthor,5);
-const offerDataArray = generateDataArray(createOffer,5);
-const locationDataArray = generateDataArray(getLocation,10);
-
-const offerTypeLib = {
-  flat: 'Квартира',
-  bungalow: 'Бунгало',
-  house: 'Дом',
-  palace: 'Дворец',
-  hotel: 'Отель',
+const similarOfferData = function (authorData, offerData, locationData) {
+  return [authorData, offerData,locationData];
 };
 
-export{authorDataArray,offerDataArray,locationDataArray,offerTypeLib};
+const offerDataArray = new Array(OFFER_MAGIC_COUNT).fill(null).map(() => similarOfferData(createAuthor(), createOffer(), getLocation()));
+export{offerDataArray};
