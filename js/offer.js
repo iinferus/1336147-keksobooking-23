@@ -25,22 +25,22 @@ function createSimilarAds(data) {
     offerElement = cardTemplate.cloneNode(true);
     function getStringRoom(offer) {
       if (offer.rooms > 1 && offer.rooms < 5) {
-        return 'комнаты';
+        return `${offer.rooms} комнаты`;
       }
       if (offer.rooms >= 5) {
-        return 'комнат';
+        return `${offer.rooms} комнат`;
       }
-      return 'комната';
+      return `${offer.rooms} комната`;
     }
 
     function getStringGuests(offer) {
       if (offer.guests === '0') {
-        return 'не для гостей';
+        return ' не для гостей';
       }
       if (offer.guests > 1) {
-        return `для ${offer.guests} гостей`;
+        return ` для ${offer.guests} гостей`;
       }
-      return `для ${offer.guests} гостя`;
+      return ` для ${offer.guests} гостя`;
     }
 
     let getPhoto;
@@ -50,7 +50,7 @@ function createSimilarAds(data) {
       replaceTemplate('popup__text--address', offer.address);
       replaceTemplate('popup__type', OFFER_TYPE_LIB[offer.type]);
       replaceTemplate('popup__text--price', `${offer.price} ₽/ночь`);
-      replaceTemplate('popup__text--capacity', `${offer.rooms} ${getStringRoom(offer)} ${getStringGuests(offer)}`);
+      replaceTemplate('popup__text--capacity', getStringRoom(offer) + getStringGuests(offer));
       replaceTemplate('popup__text--time', `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`);
       replaceTemplate('popup__description', offer.description);
 
