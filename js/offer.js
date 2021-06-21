@@ -12,7 +12,7 @@ const cardTemplate = document.querySelector('#card')
 
 let offerElement;
 
-function replaceTemplate (selector, string) {
+function replaceTemplate(selector, string) {
   if (typeof element !== undefined) {
     const elem = offerElement.querySelector(`.${selector}`);
     return elem.textContent = string;
@@ -20,38 +20,37 @@ function replaceTemplate (selector, string) {
   offerElement.querySelector(`.${selector}`).classList.add('visually-hidden');
 }
 
-function generateSimilarAds(data) {
+function createSimilarAds(data) {
   data.forEach((element) => {
     offerElement = cardTemplate.cloneNode(true);
-    let rooms;
-    let guests;
+    function getStringRoom(offer) {
+      if (offer.rooms > 1 && offer.rooms < 5) {
+        return 'комнаты';
+      }
+      if (offer.rooms >= 5) {
+        return 'комнат';
+      }
+      return 'комната';
+    }
+
+    function getStringGuests(offer) {
+      if (offer.guests === '0') {
+        return 'не для гостей';
+      }
+      if (offer.guests > 1) {
+        return `для ${offer.guests} гостей`;
+      }
+      return `для ${offer.guests} гостя`;
+    }
+
     let getPhoto;
     function generateOffer(offer) {
-      rooms = function getStringRoom() {
-        if (offer.rooms > 1 && offer.rooms < 5) {
-          return 'комнаты';
-        }
-        if (offer.rooms > 5) {
-          return 'комнат';
-        }
-        return 'комната';
-      };
-
-      guests = function getStringGuests() {
-        if (offer.guests === '0') {
-          return 'не для гостей';
-        }
-        if (offer.guests > 1) {
-          return `для ${offer.guests} гостей`;
-        }
-        return `для ${offer.guests} гостя`;
-      };
 
       replaceTemplate('popup__title', offer.title);
       replaceTemplate('popup__text--address', offer.address);
       replaceTemplate('popup__type', OFFER_TYPE_LIB[offer.type]);
       replaceTemplate('popup__text--price', `${offer.price} ₽/ночь`);
-      replaceTemplate('popup__text--capacity', `${offer.rooms} ${rooms()} ${guests()}`);
+      replaceTemplate('popup__text--capacity', `${offer.rooms} ${getStringRoom(offer)} ${getStringGuests(offer)}`);
       replaceTemplate('popup__text--time', `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`);
       replaceTemplate('popup__description', offer.description);
 
@@ -92,4 +91,4 @@ function generateSimilarAds(data) {
   return offerElement;
 }
 
-export {generateSimilarAds};
+export {createSimilarAds};

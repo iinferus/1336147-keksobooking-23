@@ -28,7 +28,7 @@ const locationLng = {
   max: 139.8,
 };
 
-const OFFER_MAGIC_COUNT = 10;
+const OFFER_COUNT = 10;
 
 function generateRandomNumber(minNumber, maxNumber, afterDotNumber = 0) {
   const lower = Math.min(Math.abs(minNumber), Math.abs(maxNumber));
@@ -85,9 +85,9 @@ function createOffer() {
   };
 }
 
-const similarOfferData = function (authorData, offerData, locationData) {
-  return [authorData, offerData,locationData];
+const uniteData = function(author, offer, location) {
+  return [author, offer,location];
 };
 
-const offerDataArray = new Array(OFFER_MAGIC_COUNT).fill(null).map(() => similarOfferData(createAuthor(), createOffer(), getLocation()));
-export{offerDataArray};
+const offersDataArrays = new Array(OFFER_COUNT).fill(null).map(() => uniteData(createAuthor(), createOffer(), getLocation()));
+export{offersDataArrays};
