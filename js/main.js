@@ -1,10 +1,5 @@
-import {createAuthor, getLocation, createOffer} from './data.js';
+import {offersDataArrays} from './data.js';
+import {createSimilarAds} from './offer.js';
+const offerList = document.querySelector('#map-canvas');
 
-const DATA_ARRAY_COUNT = 10;
-
-// eslint-disable-next-line no-unused-vars
-const dataArray = new Array(DATA_ARRAY_COUNT).fill(null).map(() => {
-  createAuthor();
-  getLocation();
-  createOffer();
-});
+offerList.appendChild(createSimilarAds(offersDataArrays));
