@@ -30,11 +30,12 @@ adFormTitle.addEventListener('input', () => {
 });
 
 adFormPrice.addEventListener('input', () => {
+  const minPrice = adFormPrice.min;
   const valueLength = adFormPrice.value;
-  if (adFormPrice.validity.valueMissing) {
-    adFormPrice.setCustomValidity('Обязательное поле');
+  if (valueLength < minPrice) {
+    adFormPrice.setCustomValidity(`Минимальная цена - ${minPrice}.`);
   } else if (valueLength > MAX_PRICE) {
-    adFormPrice.setCustomValidity(`Максимальная цена - ${MAX_PRICE}`);
+    adFormPrice.setCustomValidity(`Максимальная цена - ${MAX_PRICE}.`);
   } else {
     adFormPrice.setCustomValidity('');
   }
