@@ -26,7 +26,7 @@ adFormType.addEventListener('change', () => {
   });
 });
 
-adFormGuest.addEventListener('change', () => {
+function validateGuests() {
   const valueRoom = +adFormRoom.value;
   const valueGuest = +adFormGuest.value;
 
@@ -39,4 +39,7 @@ adFormGuest.addEventListener('change', () => {
   }
 
   adFormGuest.reportValidity();
-});
+}
+
+adFormGuest.addEventListener('change', () => validateGuests());
+adFormRoom.addEventListener('change', () => validateGuests());
