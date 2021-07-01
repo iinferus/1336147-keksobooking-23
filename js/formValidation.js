@@ -11,6 +11,11 @@ const adFormPrice = adForm.querySelector('#price');
 const adFormRoom = adForm.querySelector('#room_number');
 const adFormGuest = adForm.querySelector('#capacity');
 const adFormType = adForm.querySelector('#type');
+const adFormTimeIn = adForm.querySelector('#timein');
+const adFormTimeInOpt = adFormTimeIn.querySelectorAll('option');
+const adFormTimeOut = adForm.querySelector('#timeout');
+const adFormTimeOutOpt = adFormTimeOut.querySelectorAll('option');
+
 
 const typeKeys = Object.keys(TYPES_MIN_PRICES);
 
@@ -45,3 +50,21 @@ function validateGuests() {
 
 adFormGuest.addEventListener('change', () => validateGuests());
 adFormRoom.addEventListener('change', () => validateGuests());
+
+function changeTime(firstArray, secondArray) {
+  let valueTime;
+
+  firstArray.forEach((optionFirst) => {
+    if (optionFirst.selected) {
+      valueTime = optionFirst;
+    }
+  });
+  secondArray.forEach((optionSecond) => {
+    if (optionSecond.value === valueTime.value) {
+      optionSecond.selected = 'true';
+    }
+  });
+}
+
+adFormTimeIn.addEventListener('change', () => changeTime(adFormTimeInOpt, adFormTimeOutOpt));
+adFormTimeOut.addEventListener('change', () => changeTime(adFormTimeOutOpt, adFormTimeInOpt));
