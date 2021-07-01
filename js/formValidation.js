@@ -30,8 +30,10 @@ function validateGuests() {
   const valueRoom = +adFormRoom.value;
   const valueGuest = +adFormGuest.value;
 
-  if (valueRoom < valueGuest || valueRoom !== 100 && valueGuest === 0) {
+  if (valueRoom < valueGuest) {
     adFormGuest.setCustomValidity('Гостей не может быть больше, чем комнат');
+  } else if (valueRoom !== 100 && valueGuest === 0) {
+    adFormGuest.setCustomValidity('Минимум один гость');
   } else if (valueRoom === 100 && valueGuest > 0) {
     adFormGuest.setCustomValidity('Для 100 комнат возможное значение 0 гостей');
   } else {
