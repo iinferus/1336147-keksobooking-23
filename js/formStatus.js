@@ -22,6 +22,8 @@ function setInactiveState() {
   filterMapFeaturesFieldset.setAttribute('disabled', true);
 }
 
+setInactiveState();
+
 function setActiveState() {
   adForm.classList.remove('ad-form--disabled');
   for (const element of adFormElements) {
@@ -37,4 +39,4 @@ function setActiveState() {
   filterMapFeaturesFieldset.removeAttribute('disabled');
 }
 
-export {setInactiveState, setActiveState};
+export {setActiveState};
