@@ -3,7 +3,6 @@ import {offersDataArrays} from './data.js';
 import {createSimilarAd} from './offer.js';
 
 const adFormAddress = document.querySelector('#address');
-const adFormReset = document.querySelector('.ad-form__reset');
 
 const map = L.map('map-canvas')
   .on('load', () => {
@@ -50,7 +49,7 @@ mainMarker.on('moveend', (evt) => {
   adFormAddress.value = `${markerValue.lat.toFixed(5)} ${markerValue.lng.toFixed(5)}`;
 });
 
-adFormReset.addEventListener('click', () => {
+function resetMap() {
   mainMarker.setLatLng({
     lat: 35.682500,
     lng: 139.752100,
@@ -60,13 +59,13 @@ adFormReset.addEventListener('click', () => {
     lat: 35.6825000,
     lng: 139.7521100,
   }, 12);
-});
+}
 
 const markerGroup = L.layerGroup().addTo(map);
 
 offersDataArrays.forEach((offerData) => {
-  const lat = offerData[2].lat;
-  const lng = offerData[2].lng;
+  const lat = offerData.location.lat;
+  const lng = offerData.location.lng;
 
   const offer = createSimilarAd(offerData);
 
@@ -80,3 +79,4 @@ offersDataArrays.forEach((offerData) => {
   marker.addTo(markerGroup).bindPopup(offer);
 });
 
+export {resetMap};

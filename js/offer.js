@@ -42,9 +42,7 @@ function createSimilarAd(data) {
     return ` для ${offer.guests} гостя`;
   }
 
-  let getPhoto;
   function generateOffer(offer) {
-
     replaceTemplate('popup__title', offer.title);
     replaceTemplate('popup__text--address', offer.address);
     replaceTemplate('popup__type', OFFER_TYPE_LIB[offer.type]);
@@ -54,7 +52,7 @@ function createSimilarAd(data) {
     replaceTemplate('popup__description', offer.description);
 
     const photosPopup = offerElement.querySelector('.popup__photos');
-    getPhoto = function makePhoto() {
+    function makePhoto() {
       photosPopup.textContent = '';
       offer.photos.forEach((photo) => {
         const photoElement = document.createElement('img');
@@ -65,12 +63,12 @@ function createSimilarAd(data) {
         photoElement.alt = 'Фотография жилья';
         photosPopup.appendChild(photoElement);
       });
-    };
+    }
 
     if(offer.photos === '') {
       photosPopup.classList.add('visually-hidden');
     } else {
-      getPhoto();
+      makePhoto();
     }
 
     const featuresList = offerElement.querySelector('.popup__features');
@@ -84,9 +82,9 @@ function createSimilarAd(data) {
     featuresList.appendChild(featuresListFragment);
   }
 
-  generateOffer(data[1]);
+  generateOffer(data.offer);
   const authorPhoto = offerElement.querySelector('.popup__avatar');
-  authorPhoto.src = data[0].avatar;
+  authorPhoto.src = data.author.avatar;
   return offerElement;
 }
 

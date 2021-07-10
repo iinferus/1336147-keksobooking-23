@@ -85,8 +85,8 @@ function createOffer() {
   };
 }
 
-const uniteData = function(author, offer, location) {
-  return [author, offer, location];
+const uniteData = function(authorArray, offerArray, locationArray) {
+  return {author: authorArray, offer: offerArray,location: locationArray};
 };
 
 const offersDataArrays = new Array(OFFER_COUNT).fill(null).map(() => uniteData(createAuthor(), createOffer(), getLocation()));
