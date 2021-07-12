@@ -1,11 +1,6 @@
-import {offersDataArrays} from './data.js';
-import {createSimilarAds} from './offer.js';
-import {setInactiveState, setActiveState} from './formStatus.js';
 import './formValidation.js';
-const offerList = document.querySelector('#map-canvas');
+import {resetMap} from './map.js';
 
-setInactiveState();
-setActiveState();
+const adFormReset = document.querySelector('.ad-form__reset');
 
-offerList.appendChild(createSimilarAds(offersDataArrays));
-
+adFormReset.addEventListener('click', () => resetMap());

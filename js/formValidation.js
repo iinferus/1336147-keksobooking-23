@@ -16,7 +16,6 @@ const adFormTimeInOpt = adFormTimeIn.querySelectorAll('option');
 const adFormTimeOut = adForm.querySelector('#timeout');
 const adFormTimeOutOpt = adFormTimeOut.querySelectorAll('option');
 
-
 const typeKeys = Object.keys(TYPES_MIN_PRICES);
 
 adFormType.addEventListener('change', () => {
