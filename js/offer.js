@@ -65,7 +65,7 @@ function createSimilarAd(data) {
       });
     }
 
-    if(offer.photos === '') {
+    if(offer.photos === undefined) {
       photosPopup.classList.add('visually-hidden');
     } else {
       makePhoto();
@@ -74,12 +74,16 @@ function createSimilarAd(data) {
     const featuresList = offerElement.querySelector('.popup__features');
     featuresList.textContent = '';
     const featuresListFragment = document.createDocumentFragment();
-    offer.features.forEach((feature) => {
-      const featureTemplate = document.createElement('li');
-      featureTemplate.classList.add('popup__feature',`popup__feature--${feature}`);
-      featuresListFragment.appendChild(featureTemplate);
-    });
-    featuresList.appendChild(featuresListFragment);
+    if (offer.feature === undefined) {
+      featuresList.classList.add('visually-hidden');
+    } else {
+      offer.features.forEach((feature) => {
+        const featureTemplate = document.createElement('li');
+        featureTemplate.classList.add('popup__feature',`popup__feature--${feature}`);
+        featuresListFragment.appendChild(featureTemplate);
+      });
+      featuresList.appendChild(featuresListFragment);
+    }
   }
 
   generateOffer(data.offer);
