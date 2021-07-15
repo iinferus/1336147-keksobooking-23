@@ -1,4 +1,4 @@
-import {SEND_DATA} from './fetch.js';
+import {sendData} from './fetch.js';
 import {formSuccess, formFail} from './message.js';
 
 const TYPES_MIN_PRICES = {
@@ -78,7 +78,7 @@ const resetForm = () => {
 const setOfferFormSubmit = (resetPage) => {
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    SEND_DATA(
+    sendData(
       () => {formSuccess(); resetPage();},
       () => formFail(),
       new FormData(evt.target),
