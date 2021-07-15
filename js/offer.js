@@ -65,7 +65,7 @@ function createSimilarAd(data) {
       });
     }
 
-    if(offer.photos === undefined) {
+    if(!offer.photos) {
       photosPopup.classList.add('visually-hidden');
     } else {
       makePhoto();
@@ -74,7 +74,7 @@ function createSimilarAd(data) {
     const featuresList = offerElement.querySelector('.popup__features');
     featuresList.textContent = '';
     const featuresListFragment = document.createDocumentFragment();
-    if (offer.feature === undefined) {
+    if (!offer.feature) {
       featuresList.classList.add('visually-hidden');
     } else {
       offer.features.forEach((feature) => {

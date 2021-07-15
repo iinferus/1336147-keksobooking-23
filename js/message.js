@@ -1,6 +1,6 @@
-import {onPopupEscKeydown, closeMessage} from './util.js';
-
 const ALERT_SHOW_TIME = 5000;
+
+const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
 
 const mapError = (message) => {
   const map = document.querySelector('.map');
@@ -23,23 +23,39 @@ const mapError = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
+let messageElement;
+
+const closeMessage = () => {
+  messageElement.remove();
+
+  document.removeEventListener('keydown', onPopupEscKeydown);
+  document.removeEventListener('click', closeMessage);
+};
+
+const onPopupEscKeydown = (evt) => {
+  if (isEscEvent(evt)) {
+    evt.preventDefault();
+    closeMessage();
+  }
+};
+
 const formSuccess = () => {
   const messageTmpl = document.querySelector('#success')
     .content
     .querySelector('.success');
 
-  const messageElement = messageTmpl.cloneNode(true);
+  messageElement = messageTmpl.cloneNode(true);
 
   document.body.appendChild(messageElement);
-  document.addEventListener('keydown', onPopupEscKeydown);
-  document.addEventListener('click', closeMessage);
+  document.addEventListener('keydown', onPopupEscKeydown, {once: true});
+  document.addEventListener('click', closeMessage, {once: true});
 };
 
 const formFail = () => {
   const messageTmpl = document.querySelector('#error')
     .content
     .querySelector('.error');
-  const messageElement = messageTmpl.cloneNode(true);
+  messageElement = messageTmpl.cloneNode(true);
   const messageButton = messageElement.querySelector('.messageTmpl');
 
   document.body.appendChild(messageElement);

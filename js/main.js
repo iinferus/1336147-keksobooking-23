@@ -1,6 +1,6 @@
 import {setOfferFormSubmit, resetForm} from './formValidation.js';
 import {resetMap, createSimilarMarker} from './map.js';
-import {getData} from './fetch.js';
+import {GET_DATA} from './fetch.js';
 import {mapError} from './message.js';
 import {filterReset} from './filter.js';
 
@@ -12,7 +12,7 @@ adFormReset.addEventListener('click', () => {
   resetForm();
 });
 
-getData((data) => {
+GET_DATA((data) => {
   createSimilarMarker(data.slice(0, 10));
 }, mapError);
 
