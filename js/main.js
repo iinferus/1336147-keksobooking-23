@@ -4,6 +4,7 @@ import {getData} from './fetch.js';
 import {mapError} from './message.js';
 import {filterOffers, filterReset} from './filter.js';
 import {debounce} from './utils/debounce.js';
+import './photoPreview.js';
 
 const adFormReset = document.querySelector('.ad-form__reset');
 const mapFilter = document.querySelector('.map__filters');
