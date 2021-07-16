@@ -1,7 +1,6 @@
 const GET_REQUEST_ADDRESS = 'https://23.javascript.pages.academy/keksobooking/data';
 const POST_REQUEST_ADDRESS = 'https://23.javascript.pages.academy/keksobooking';
 
-
 const getData = (onSuccess, onFail) => {
   fetch(GET_REQUEST_ADDRESS)
     .then((response) => response.json())
@@ -9,7 +8,7 @@ const getData = (onSuccess, onFail) => {
       onSuccess(data);
     })
     .catch(() => {
-      onFail('Не удалось загрузить похожие объявления');
+      onFail();
     });
 };
 

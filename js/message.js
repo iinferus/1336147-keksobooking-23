@@ -2,7 +2,7 @@ const ALERT_SHOW_TIME = 5000;
 
 const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
 
-const mapError = (message) => {
+const mapError = () => {
   const map = document.querySelector('.map');
   map.style.boxShadow = '0px 0px 30px red';
 
@@ -13,7 +13,7 @@ const mapError = (message) => {
   alertContainer.style.fontSize = '30px';
   alertContainer.style.textTransform = 'uppercase';
 
-  alertContainer.textContent = message;
+  alertContainer.textContent = 'Не удалось загрузить похожие объявления';
 
   map.parentNode.insertBefore(alertContainer, map.nextSibling);
 

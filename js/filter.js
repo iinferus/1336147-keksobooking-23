@@ -4,10 +4,8 @@ const checkType = (data) => {
   const filterTypeValue = document.querySelector('#housing-type').value;
   if (filterTypeValue === 'any') {
     return true;
-  } else if (data.offer.type === filterTypeValue) {
-    return true;
   }
-  return false;
+  return data.offer.type === filterTypeValue;
 };
 
 const getPriceRange = (value) => {
@@ -34,26 +32,24 @@ const checkPrice = (data) => {
   const range = getPriceRange(filterTypePrice);
   if (filterTypePrice === 'any') {
     return true;
-  } else if (dataOfferPrice >= range.from && dataOfferPrice <= range.to) {
-    return true;
   }
-  return false;
+  return dataOfferPrice >= range.from && dataOfferPrice <= range.to;
 };
 
 const checkRooms = (data) => {
   const filterTypeRooms = document.querySelector('#housing-rooms').value;
-  if (filterTypeRooms === 'any' || filterTypeRooms === String(data.offer.rooms)) {
+  if (filterTypeRooms === 'any') {
     return true;
   }
-  return false;
+  return filterTypeRooms === String(data.offer.rooms);
 };
 
 const checkGuests = (data) => {
   const filterTypeGuests = document.querySelector('#housing-guests').value;
-  if (filterTypeGuests === 'any' || filterTypeGuests === String(data.offer.guests)) {
+  if (filterTypeGuests === 'any') {
     return true;
   }
-  return false;
+  return filterTypeGuests === String(data.offer.guests);
 };
 
 const checkFeatures = (data) => {
@@ -82,4 +78,13 @@ const filterOffers = (offers) =>
 
 const filterReset = () => filter.reset();
 
-export {filterOffers, filterReset};
+const filterBlock = () => {
+  filter.classList.add('map__filters--disabled');
+  const filterSelect = filter.querySelectorAll('.map__filter');
+  for (const element of filterSelect) {
+    element.setAttribute('disabled', true);
+  }
+  filter.querySelector('.map__features').setAttribute('disabled', true);
+};
+
+export {filterOffers, filterReset, filterBlock};

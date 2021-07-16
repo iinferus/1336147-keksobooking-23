@@ -9,6 +9,11 @@ const TYPES_MIN_PRICES = {
   palace: 10000,
 };
 
+const ALLOWED_COUNT_GUESTS = {
+  min: 0,
+  max: 100,
+};
+
 const adForm = document.querySelector('.ad-form');
 const adFormPrice = adForm.querySelector('#price');
 const adFormRoom = adForm.querySelector('#room_number');
@@ -39,9 +44,9 @@ function validateGuests() {
 
   if (valueRoom < valueGuest) {
     adFormGuest.setCustomValidity('Гостей не может быть больше, чем комнат');
-  } else if (valueRoom !== 100 && valueGuest === 0) {
+  } else if (valueRoom !== ALLOWED_COUNT_GUESTS.max && valueGuest === ALLOWED_COUNT_GUESTS.min) {
     adFormGuest.setCustomValidity('Минимум один гость');
-  } else if (valueRoom === 100 && valueGuest > 0) {
+  } else if (valueRoom === ALLOWED_COUNT_GUESTS.max && valueGuest > ALLOWED_COUNT_GUESTS.min) {
     adFormGuest.setCustomValidity('Для 100 комнат возможное значение 0 гостей');
   } else {
     adFormGuest.setCustomValidity('');

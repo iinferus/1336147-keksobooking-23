@@ -40,3 +40,18 @@ avatarFileChooser.addEventListener('change', () => {
 houseFileChooser.addEventListener('change', () => {
   createPreviewPhoto(houseFileChooser, housePreview);
 });
+
+const resetPhoto = () => {
+  housePreview.innerHTML = '';
+  avatarPreview.innerHTML = '';
+
+  avatarPreview.style.padding = '0 15px';
+  const photoElement = document.createElement('img');
+  photoElement.setAttribute('alt', 'Аватар пользователя');
+  photoElement.setAttribute('width', 40);
+  photoElement.setAttribute('height', 44);
+  photoElement.src = 'img/muffin-grey.svg';
+  avatarPreview.appendChild(photoElement);
+};
+
+export {resetPhoto};

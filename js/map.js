@@ -1,6 +1,20 @@
 import {setActiveState} from './formStatus.js';
 import {createSimilarAd} from './offer.js';
 
+const MAP_DEFAULT_SETTING = {
+  lat: 35.68250,
+  lng: 139.75211,
+  view: 12,
+  titleLayer: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  copyright: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  mainMarkerUrl: '../img/main-pin.svg',
+  mainMarkerSize: [52, 52],
+  mainMarkerAnchor: [26, 52],
+  MarkerUrl: '../img/pin.svg',
+  MarkerSize: [40, 40],
+  MarkerAnchor: [20, 40],
+};
+
 const adFormAddress = document.querySelector('#address');
 
 const map = L.map('map-canvas')
@@ -8,32 +22,32 @@ const map = L.map('map-canvas')
     setActiveState();
   })
   .setView({
-    lat: 35.6825000,
-    lng: 139.7521100,
-  }, 12);
+    lat: MAP_DEFAULT_SETTING.lat,
+    lng: MAP_DEFAULT_SETTING.lng,
+  }, MAP_DEFAULT_SETTING.view);
 
 L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  MAP_DEFAULT_SETTING.titleLayer,
   {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    attribution: MAP_DEFAULT_SETTING.copyright,
   },
 ).addTo(map);
 
 const mainMarkerIcon = L.icon({
-  iconUrl: '../img/main-pin.svg',
-  iconSize: [52, 52],
-  iconAnchor: [26, 52],
+  iconUrl: MAP_DEFAULT_SETTING.mainMarkerUrl,
+  iconSize: MAP_DEFAULT_SETTING.mainMarkerSize,
+  iconAnchor: MAP_DEFAULT_SETTING.mainMarkerAnchor,
 });
 
 const markerIcon = L.icon({
-  iconUrl: '../img/pin.svg',
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
+  iconUrl: MAP_DEFAULT_SETTING.MarkerUrl,
+  iconSize: MAP_DEFAULT_SETTING.MarkerSize,
+  iconAnchor: MAP_DEFAULT_SETTING.MarkerAnchor,
 });
 const mainMarker = L.marker(
   {
-    lat: 35.682500,
-    lng: 139.752100,
+    lat: MAP_DEFAULT_SETTING.lat,
+    lng: MAP_DEFAULT_SETTING.lng,
   },
   {
     draggable: true,
@@ -50,14 +64,14 @@ mainMarker.on('moveend', (evt) => {
 
 function resetMap() {
   mainMarker.setLatLng({
-    lat: 35.682500,
-    lng: 139.752100,
+    lat: MAP_DEFAULT_SETTING.lat,
+    lng: MAP_DEFAULT_SETTING.lng,
   });
 
   map.setView({
-    lat: 35.6825000,
-    lng: 139.7521100,
-  }, 12);
+    lat: MAP_DEFAULT_SETTING.lat,
+    lng: MAP_DEFAULT_SETTING.lng,
+  }, MAP_DEFAULT_SETTING.view);
 }
 
 const markerGroup = L.layerGroup().addTo(map);

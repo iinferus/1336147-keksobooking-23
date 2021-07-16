@@ -2,9 +2,9 @@ import {setOfferFormSubmit, resetForm} from './formValidation.js';
 import {resetMap, createSimilarMarker, cleanMap} from './map.js';
 import {getData} from './fetch.js';
 import {mapError} from './message.js';
-import {filterOffers, filterReset} from './filter.js';
-import {debounce} from './utils/debounce.js';
-import './photoPreview.js';
+import {filterOffers, filterReset, filterBlock} from './filter.js';
+import {debounce} from './debounce.js';
+import {resetPhoto} from './photoPreview.js';
 
 const adFormReset = document.querySelector('.ad-form__reset');
 const mapFilter = document.querySelector('.map__filters');
@@ -15,6 +15,7 @@ adFormReset.addEventListener('click', () => {
   resetMap();
   filterReset();
   resetForm();
+  resetPhoto();
 });
 
 getData((data) => {
@@ -23,6 +24,6 @@ getData((data) => {
     cleanMap();
     createSimilarMarker((filterOffers(data)).slice(0, OFFERS_MAGIC_COUNT));
   }, OFFERS_DELAY));
-}, mapError);
+}, () => {mapError();filterBlock();});
 
-setOfferFormSubmit(() => {resetMap();filterReset();resetForm();});
+setOfferFormSubmit(() => {resetMap();filterReset();resetForm();resetPhoto();});
