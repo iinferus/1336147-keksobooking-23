@@ -1,3 +1,6 @@
+import {sendData} from './fetch.js';
+import {formSuccess, formFail} from './message.js';
+
 const TYPES_MIN_PRICES = {
   bungalow: 0,
   flat: 1000,
@@ -67,3 +70,20 @@ function changeTime(firstArray, secondArray) {
 
 adFormTimeIn.addEventListener('change', () => changeTime(adFormTimeInOpt, adFormTimeOutOpt));
 adFormTimeOut.addEventListener('change', () => changeTime(adFormTimeOutOpt, adFormTimeInOpt));
+
+const resetForm = () => {
+  adForm.reset();
+};
+
+const setOfferFormSubmit = (resetPage) => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    sendData(
+      () => {formSuccess(); resetPage();},
+      () => formFail(),
+      new FormData(evt.target),
+    );
+  });
+};
+
+export {setOfferFormSubmit, resetForm};

@@ -1,5 +1,4 @@
 import {setActiveState} from './formStatus.js';
-import {offersDataArrays} from './data.js';
 import {createSimilarAd} from './offer.js';
 
 const adFormAddress = document.querySelector('#address');
@@ -63,20 +62,22 @@ function resetMap() {
 
 const markerGroup = L.layerGroup().addTo(map);
 
-offersDataArrays.forEach((offerData) => {
-  const lat = offerData.location.lat;
-  const lng = offerData.location.lng;
+const createSimilarMarker = (data) => {
+  data.forEach((offerData) => {
+    const lat = offerData.location.lat;
+    const lng = offerData.location.lng;
 
-  const offer = createSimilarAd(offerData);
+    const offer = createSimilarAd(offerData);
 
-  const marker = L.marker({
-    lat,
-    lng,
-  },{
-    icon: markerIcon,
+    const marker = L.marker({
+      lat,
+      lng,
+    },{
+      icon: markerIcon,
+    });
+
+    marker.addTo(markerGroup).bindPopup(offer);
   });
+};
 
-  marker.addTo(markerGroup).bindPopup(offer);
-});
-
-export {resetMap};
+export {resetMap, createSimilarMarker};
