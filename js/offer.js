@@ -74,7 +74,7 @@ function createSimilarAd(data) {
     const featuresList = offerElement.querySelector('.popup__features');
     featuresList.textContent = '';
     const featuresListFragment = document.createDocumentFragment();
-    if (!offer.feature) {
+    if (!offer.features) {
       featuresList.classList.add('visually-hidden');
     } else {
       offer.features.forEach((feature) => {

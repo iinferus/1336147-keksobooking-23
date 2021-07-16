@@ -80,4 +80,8 @@ const createSimilarMarker = (data) => {
   });
 };
 
-export {resetMap, createSimilarMarker};
+const cleanMap = () => {
+  markerGroup.clearLayers ();
+};
+
+export {resetMap, createSimilarMarker, cleanMap};
